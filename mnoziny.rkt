@@ -38,6 +38,13 @@
   )
 )
 
+(define (listListuNaListMnozin aList)
+  (cond
+    ((empty? aList) '())
+    (else (cons (mnozina (car aList)) (listListuNaListMnozin (cdr aList))))
+  )
+)
+
 (define (sjednoceni_r aList1 aList2)
   (cond
     ((empty? aList1) aList2)
@@ -62,7 +69,7 @@
 )
 
 (define (sjednoceni_mm aListL)
-  (sjednoceni_m (mnozina aListL))
+  (sjednoceni_m (listListuNaListMnozin aListL))
 )
 
 (define (prunik_r aList1 aList2)
