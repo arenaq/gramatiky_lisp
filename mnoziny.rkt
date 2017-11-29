@@ -110,12 +110,11 @@
 ;(A 1 2 B G C H)
 (sjednoceni '(A 1 2 A B C) '(A 2 1 B C C H))
 ;(A 2 1 B C H)
-(sjednoceni_m '( ((A)(B)(C)) ((D)(E)(C)) (A) (A 1)(B 2)(C 3) ))
+(sjednoceni_mm '( ((A)(B)(C)) ((D)(E)(C)) (A) (A 1)(B 2 2)(C 3 3) ))
 ;((A) (B) (D) (E) (C) A 1 B 2 C 3)
+(sjednoceni_mm '( (A B) (A B C D E E E E)))
+;(A B C D E)
 (prunik '(6 h 4 g s 1) '(g 5 f 7 s 1))
 ;(g s 1)
 (prunik_m '((A B C D)(D C D A)(C D E F G)(D C E F)(A B C E F G)))
 ;(C)
-(sjednoceni_mm '( (A B) (A B C D E E E E)))
-; - průser - duplicity v posledním listu se nekontrolují
-; 1) udělat množinu z výsledku?
