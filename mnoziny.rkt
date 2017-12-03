@@ -56,19 +56,19 @@
   (_sjednoceni_rekurze (_listToSet aList1) (_listToSet aList2))
 )
 
-(define (sjednoceni_m aListL)
+(define (_sjednoceniHromadne_rekurze aListL)
   (cond
     ((not (list? aListL)) (error "Illegal arguments: sjednoceni_m list_of_lists"))
     ((not (list? (car aListL))) (error "Illegal arguments: sjednoceni_m list_of_lists"))
     ((empty? aListL) (_sjednoceni_rekurze '() '()))
     ((= (_length aListL) 1) (car aListL))
     ((= (_length aListL) 2) (_sjednoceni_rekurze (car aListL) (cadr aListL)))
-    (else (sjednoceni_m (sjednoceni (list (sjednoceni (car aListL) (cadr aListL))) (cddr aListL))))
+    (else (_sjednoceniHromadne_rekurze (sjednoceni (list (sjednoceni (car aListL) (cadr aListL))) (cddr aListL))))
   )
 )
 
 (define (sjednoceniHromadne aListL)
-  (sjednoceni_m (_listsToSets aListL))
+  (_sjednoceniHromadne_rekurze (_listsToSets aListL))
 )
 
 (define (prunik_r aList1 aList2)
