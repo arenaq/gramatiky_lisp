@@ -88,8 +88,8 @@
   (cond
     ((not (list? aListL)) (error "Illegal arguments: prunik_m list_of_lists"))
     ((not (list? (car aListL))) (error "Illegal arguments: prunik_m list_of_lists"))
-    ((= (_length aListL) 1) (_prunik_rekurze '() (car aListL)))
     ((empty? aListL) '())
+    ((= (_length aListL) 1) (car aListL))
     ((= (_length aListL) 2) (_prunik_rekurze (car aListL) (cadr aListL)))
     (else (_prunikHromadny_rekurze (sjednoceni (list (prunik (car aListL) (cadr aListL))) (cddr aListL))))
   )
