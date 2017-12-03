@@ -71,27 +71,27 @@
   (_sjednoceniHromadne_rekurze (_listsToSets aListL))
 )
 
-(define (prunik_r aList1 aList2)
+(define (_prunik_rekurze aList1 aList2)
   (cond
     ((empty? aList1) '())
     ((empty? aList2) '())
-    ((_listContainsObject aList2 (car aList1)) (sjednoceni (list (car aList1)) (prunik_r (cdr aList1) aList2)))
-    (else (prunik_r (cdr aList1) aList2))
+    ((_listContainsObject aList2 (car aList1)) (sjednoceni (list (car aList1)) (_prunik_rekurze (cdr aList1) aList2)))
+    (else (_prunik_rekurze (cdr aList1) aList2))
   )
 )
 
 (define (prunik aList1 aList2)
-  (prunik_r (_listToSet aList1) (_listToSet aList2))
+  (_prunik_rekurze (_listToSet aList1) (_listToSet aList2))
 )
 
-(define (prunik_m aListL)
+(define (_prunikHromadny_rekurze aListL)
   (cond
     ((not (list? aListL)) (error "Illegal arguments: prunik_m list_of_lists"))
     ((not (list? (car aListL))) (error "Illegal arguments: prunik_m list_of_lists"))
-    ((empty? aListL) (prunik_r '() '()))
-    ((= (_length aListL) 1) (prunik_r '() (car aListL)))
-    ((= (_length aListL) 2) (prunik_r (car aListL) (cadr aListL)))
-    (else (prunik_m (sjednoceni (list (prunik (car aListL) (cadr aListL))) (cddr aListL))))
+    ((empty? aListL) (_prunik_rekurze '() '()))
+    ((= (_length aListL) 1) (_prunik_rekurze '() (car aListL)))
+    ((= (_length aListL) 2) (_prunik_rekurze (car aListL) (cadr aListL)))
+    (else (_prunikHromadny_rekurze (sjednoceni (list (prunik (car aListL) (cadr aListL))) (cddr aListL))))
   )
 )
 
@@ -115,5 +115,5 @@
 ;(A B C D E)
 (prunik '(6 h 4 g s 1) '(g 5 f 7 s 1))
 ;(g s 1)
-(prunik_m '((A B C D)(D C D A)(C D E F G)(D C E F)(A B C E F G)))
+(_prunikHromadny_rekurze '((A B C D)(D C D A)(C D E F G)(D C E F)(A B C E F G)))
 ;(C)
