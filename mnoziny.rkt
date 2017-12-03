@@ -22,7 +22,6 @@
 
 (define (isObjectInList a aList)
   (cond
-    ;((list? a) (error "Illegal arguments: isObjectInList object list"))
     ((not (list? aList)) (error "Illegal arguments: isObjectInList object list"))
     ((empty? aList) #f)
     ((rovnostObjektu a (car aList)))    
