@@ -20,19 +20,19 @@
   )
 )
 
-(define (isObjectInList a aList)
+(define (isObjectInList aList a)
   (cond
-    ((not (list? aList)) (error "Illegal arguments: isObjectInList object list"))
+    ((not (list? aList)) (error "Illegal arguments: isObjectInList list object"))
     ((empty? aList) #f)
     ((_listEquals? a (car aList)))    
-    (else (isObjectInList a (cdr aList)))
+    (else (isObjectInList (cdr aList) a))
   )
 )
 
 (define (mnozina aList)
   (cond
     ((empty? aList) '())
-    ((isObjectInList (car aList) (cdr aList)) (mnozina (cdr aList)))
+    ((isObjectInList (cdr aList) (car aList)) (mnozina (cdr aList)))
     (else (cons (car aList) (mnozina (cdr aList))))
   )
 )
@@ -47,7 +47,7 @@
 (define (sjednoceni_r aList1 aList2)
   (cond
     ((empty? aList1) aList2)
-    ((isObjectInList (car aList1) aList2) (sjednoceni_r (cdr aList1) aList2))
+    ((isObjectInList aList2 (car aList1)) (sjednoceni_r (cdr aList1) aList2))
     (else (cons (car aList1) (sjednoceni_r (cdr aList1) aList2)))
   )
 )
@@ -75,7 +75,7 @@
   (cond
     ((empty? aList1) '())
     ((empty? aList2) '())
-    ((isObjectInList (car aList1) aList2) (sjednoceni (list (car aList1)) (prunik_r (cdr aList1) aList2)))
+    ((isObjectInList aList2 (car aList1)) (sjednoceni (list (car aList1)) (prunik_r (cdr aList1) aList2)))
     (else (prunik_r (cdr aList1) aList2))
   )
 )
@@ -101,9 +101,9 @@
 ;f
 (_listEquals? '(A B) '(A B))
 ;t
-(isObjectInList 'E '(A 1 2 3 B C D E))
+(isObjectInList '(A 1 2 3 B C D E) 'E)
 ;t
-(isObjectInList '(A G) '((A B)(B C)(C D)(F 4)(D F)(A G)))
+(isObjectInList '((A B)(B C)(C D)(F 4)(D F)(A G)) '(A G))
 ;t
 (mnozina '(H A 1 2 G A B C A 1 2 B G C C H))
 ;(A 1 2 B G C H)
