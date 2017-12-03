@@ -95,6 +95,10 @@
   )
 )
 
+(define (prunikHromadny aListL)
+  (_prunikHromadny_rekurze (_listsToSets aListL))
+)
+
 (_length '(A 2 B 4 5))
 ;5
 (_listEquals? 'A 'B)
@@ -115,5 +119,5 @@
 ;(A B C D E)
 (prunik '(6 h 4 g s 1) '(g 5 f 7 s 1))
 ;(g s 1)
-(_prunikHromadny_rekurze '((A B C D)(D C D A)(C D E F G)(D C E F)(A B C E F G)))
+(prunikHromadny '((A B C D)(D C D A)(C D E F G)(D C E F)(A B C E F G)))
 ;(C)
