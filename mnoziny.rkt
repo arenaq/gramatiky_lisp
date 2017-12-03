@@ -37,10 +37,10 @@
   )
 )
 
-(define (listListuNaListMnozin aList)
+(define (_listsToSets aList)
   (cond
     ((empty? aList) '())
-    (else (cons (_listToSet (car aList)) (listListuNaListMnozin (cdr aList))))
+    (else (cons (_listToSet (car aList)) (_listsToSets (cdr aList))))
   )
 )
 
@@ -68,7 +68,7 @@
 )
 
 (define (sjednoceni_mm aListL)
-  (sjednoceni_m (listListuNaListMnozin aListL))
+  (sjednoceni_m (_listsToSets aListL))
 )
 
 (define (prunik_r aList1 aList2)
