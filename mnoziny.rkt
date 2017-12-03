@@ -44,25 +44,25 @@
   )
 )
 
-(define (sjednoceni_r aList1 aList2)
+(define (_sjednoceni_rekurze aList1 aList2)
   (cond
     ((empty? aList1) aList2)
-    ((_listContainsObject aList2 (car aList1)) (sjednoceni_r (cdr aList1) aList2))
-    (else (cons (car aList1) (sjednoceni_r (cdr aList1) aList2)))
+    ((_listContainsObject aList2 (car aList1)) (_sjednoceni_rekurze (cdr aList1) aList2))
+    (else (cons (car aList1) (_sjednoceni_rekurze (cdr aList1) aList2)))
   )
 )
 
 (define (sjednoceni aList1 aList2)
-  (sjednoceni_r (_listToSet aList1) (_listToSet aList2))
+  (_sjednoceni_rekurze (_listToSet aList1) (_listToSet aList2))
 )
 
 (define (sjednoceni_m aListL)
   (cond
     ((not (list? aListL)) (error "Illegal arguments: sjednoceni_m list_of_lists"))
     ((not (list? (car aListL))) (error "Illegal arguments: sjednoceni_m list_of_lists"))
-    ((empty? aListL) (sjednoceni_r '() '()))
+    ((empty? aListL) (_sjednoceni_rekurze '() '()))
     ((= (_length aListL) 1) (car aListL))
-    ((= (_length aListL) 2) (sjednoceni_r (car aListL) (cadr aListL)))
+    ((= (_length aListL) 2) (_sjednoceni_rekurze (car aListL) (cadr aListL)))
     (else (sjednoceni_m (sjednoceni (list (sjednoceni (car aListL) (cadr aListL))) (cddr aListL))))
   )
 )
