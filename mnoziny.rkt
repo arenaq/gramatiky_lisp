@@ -67,7 +67,7 @@
   )
 )
 
-(define (sjednoceni_mm aListL)
+(define (sjednoceniHromadne aListL)
   (sjednoceni_m (_listsToSets aListL))
 )
 
@@ -109,9 +109,9 @@
 ;(A 1 2 B G C H)
 (sjednoceni '(A 1 2 A B C) '(A 2 1 B C C H))
 ;(A 2 1 B C H)
-(sjednoceni_mm '( ((A)(B)(C)) ((D)(E)(C)) (A) (A 1)(B 2 2)(C 3 3) ))
+(sjednoceniHromadne '( ((A)(B)(C)) ((D)(E)(C)) (A) (A 1)(B 2 2)(C 3 3) ))
 ;((A) (B) (D) (E) (C) A 1 B 2 C 3)
-(sjednoceni_mm '( (A B) (A B C D E E E E)))
+(sjednoceniHromadne '( (A B) (A B C D E E E E)))
 ;(A B C D E)
 (prunik '(6 h 4 g s 1) '(g 5 f 7 s 1))
 ;(g s 1)
