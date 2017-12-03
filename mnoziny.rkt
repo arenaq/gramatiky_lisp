@@ -20,12 +20,12 @@
   )
 )
 
-(define (isObjectInList aList a)
+(define (isObjectInList aList aObject)
   (cond
     ((not (list? aList)) (error "Illegal arguments: isObjectInList list object"))
     ((empty? aList) #f)
-    ((_listEquals? a (car aList)))    
-    (else (isObjectInList (cdr aList) a))
+    ((_listEquals? aObject (car aList)))    
+    (else (isObjectInList (cdr aList) aObject))
   )
 )
 
