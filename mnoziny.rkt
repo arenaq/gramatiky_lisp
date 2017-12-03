@@ -29,18 +29,18 @@
   )
 )
 
-(define (mnozina aList)
+(define (_listToSet aList)
   (cond
     ((empty? aList) '())
-    ((_listContainsObject (cdr aList) (car aList)) (mnozina (cdr aList)))
-    (else (cons (car aList) (mnozina (cdr aList))))
+    ((_listContainsObject (cdr aList) (car aList)) (_listToSet (cdr aList)))
+    (else (cons (car aList) (_listToSet (cdr aList))))
   )
 )
 
 (define (listListuNaListMnozin aList)
   (cond
     ((empty? aList) '())
-    (else (cons (mnozina (car aList)) (listListuNaListMnozin (cdr aList))))
+    (else (cons (_listToSet (car aList)) (listListuNaListMnozin (cdr aList))))
   )
 )
 
@@ -53,7 +53,7 @@
 )
 
 (define (sjednoceni aList1 aList2)
-  (sjednoceni_r (mnozina aList1) (mnozina aList2))
+  (sjednoceni_r (_listToSet aList1) (_listToSet aList2))
 )
 
 (define (sjednoceni_m aListL)
@@ -81,7 +81,7 @@
 )
 
 (define (prunik aList1 aList2)
-  (prunik_r (mnozina aList1) (mnozina aList2))
+  (prunik_r (_listToSet aList1) (_listToSet aList2))
 )
 
 (define (prunik_m aListL)
@@ -105,7 +105,7 @@
 ;t
 (_listContainsObject '((A B)(B C)(C D)(F 4)(D F)(A G)) '(A G))
 ;t
-(mnozina '(H A 1 2 G A B C A 1 2 B G C C H))
+(_listToSet '(H A 1 2 G A B C A 1 2 B G C C H))
 ;(A 1 2 B G C H)
 (sjednoceni '(A 1 2 A B C) '(A 2 1 B C C H))
 ;(A 2 1 B C H)
