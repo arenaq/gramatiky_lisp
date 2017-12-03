@@ -53,7 +53,7 @@
 )
 
 (define (sjednoceni aList1 aList2)
-  (sjednoceni_r aList1 (mnozina aList2))
+  (sjednoceni_r (mnozina aList1) (mnozina aList2))
 )
 
 (define (sjednoceni_m aListL)
@@ -81,7 +81,7 @@
 )
 
 (define (prunik aList1 aList2)
-  (prunik_r aList1 (mnozina aList2))
+  (prunik_r (mnozina aList1) (mnozina aList2))
 )
 
 (define (prunik_m aListL)
