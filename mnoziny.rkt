@@ -5,15 +5,15 @@
   )
 )
 
-(define (rovnostObjektu aObject1 aObject2)
+(define (_listEquals? aObject1 aObject2)
   (cond
     ((not (list? aObject1)) (eq? aObject1 aObject2))
     ((not (list? aObject2)) (eq? aObject1 aObject2))
     ((not (= (_length aObject1) (_length aObject2))) #f)
     ((= (_length aObject1) 0) #t)
     (else
-      (if (rovnostObjektu (car aObject1) (car aObject2))
-          (rovnostObjektu (cdr aObject1) (cdr aObject2))
+      (if (_listEquals? (car aObject1) (car aObject2))
+          (_listEquals? (cdr aObject1) (cdr aObject2))
           #f
       )
     )
@@ -24,7 +24,7 @@
   (cond
     ((not (list? aList)) (error "Illegal arguments: isObjectInList object list"))
     ((empty? aList) #f)
-    ((rovnostObjektu a (car aList)))    
+    ((_listEquals? a (car aList)))    
     (else (isObjectInList a (cdr aList)))
   )
 )
@@ -97,9 +97,9 @@
 
 (_length '(A 2 B 4 5))
 ;5
-(rovnostObjektu 'A 'B)
+(_listEquals? 'A 'B)
 ;f
-(rovnostObjektu '(A B) '(A B))
+(_listEquals? '(A B) '(A B))
 ;t
 (isObjectInList 'E '(A 1 2 3 B C D E))
 ;t
