@@ -1,7 +1,7 @@
-(define (delkaListu aList)
+(define (_length aList)
   (if (empty? aList)
       0
-      (+ 1 (delkaListu (cdr aList)))
+      (+ 1 (_length (cdr aList)))
   )
 )
 
@@ -9,8 +9,8 @@
   (cond
     ((not (list? aObject1)) (eq? aObject1 aObject2))
     ((not (list? aObject2)) (eq? aObject1 aObject2))
-    ((not (= (delkaListu aObject1) (delkaListu aObject2))) #f)
-    ((= (delkaListu aObject1) 0) #t)
+    ((not (= (_length aObject1) (_length aObject2))) #f)
+    ((= (_length aObject1) 0) #t)
     (else
       (if (rovnostObjektu (car aObject1) (car aObject2))
           (rovnostObjektu (cdr aObject1) (cdr aObject2))
@@ -61,8 +61,8 @@
     ((not (list? aListL)) (error "Illegal arguments: sjednoceni_m list_of_lists"))
     ((not (list? (car aListL))) (error "Illegal arguments: sjednoceni_m list_of_lists"))
     ((empty? aListL) (sjednoceni_r '() '()))
-    ((= (delkaListu aListL) 1) (car aListL))
-    ((= (delkaListu aListL) 2) (sjednoceni_r (car aListL) (cadr aListL)))
+    ((= (_length aListL) 1) (car aListL))
+    ((= (_length aListL) 2) (sjednoceni_r (car aListL) (cadr aListL)))
     (else (sjednoceni_m (sjednoceni (list (sjednoceni (car aListL) (cadr aListL))) (cddr aListL))))
   )
 )
@@ -89,13 +89,13 @@
     ((not (list? aListL)) (error "Illegal arguments: prunik_m list_of_lists"))
     ((not (list? (car aListL))) (error "Illegal arguments: prunik_m list_of_lists"))
     ((empty? aListL) (prunik_r '() '()))
-    ((= (delkaListu aListL) 1) (prunik_r '() (car aListL)))
-    ((= (delkaListu aListL) 2) (prunik_r (car aListL) (cadr aListL)))
+    ((= (_length aListL) 1) (prunik_r '() (car aListL)))
+    ((= (_length aListL) 2) (prunik_r (car aListL) (cadr aListL)))
     (else (prunik_m (sjednoceni (list (prunik (car aListL) (cadr aListL))) (cddr aListL))))
   )
 )
 
-(delkaListu '(A 2 B 4 5))
+(_length '(A 2 B 4 5))
 ;5
 (rovnostObjektu 'A 'B)
 ;f
